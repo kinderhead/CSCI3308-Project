@@ -1,0 +1,31 @@
+1. Team Number: 14-07
+
+2. Team Name: The Grocery Gang
+
+3. Team Members: 
+- Daniel Rocabado
+- David Chang
+- Christian Greer
+- Daniel Morgenthaler
+- Ethan Tran
+- Callum McCarthy
+
+4. Application Name: GrocerWees
+
+5. Description:
+Our application is called GrocerWees and our goal is to make shopping more collaborative. Our application allows users to shop together and share the same shopping cart online. We include groceries using an API so our comstomers have up to date prices and discounts. We also include a suggestion based on what you have ordered in the past.
+
+6. Audience:
+Households, Families, Parties, People that shop together.
+
+7. Vision Statement:
+For Shoppers, Who want to shop together. GrocerWees is a collaborative shopping app that allows multiple people to shop together with a shared digital online shopping list. Unlike Amazon, our product allows collaboration between shoppers with shared and automatically updating shopping lists.
+
+
+9. Development Methodology: We are using Agile Methodology
+
+10. Communication Plan:
+We use Discord for messaging and weekly meetings. 
+
+11. Meeting Plan:
+We plan to meet over Discord every Tuesday at 4:30 PM. Our team meets with the TA in lab at 3:15 PM on Thursdays.
