@@ -13,14 +13,13 @@
 4. Application Name: GrocerWees
 
 5. Description:
-Our application is called GrocerWees and our goal is to make shopping more collaborative. Our application allows users to shop together and share the same shopping cart online. We include groceries using an API so our comstomers have up to date prices and discounts. We also include a suggestion based on what you have ordered in the past.
+Our application is called GrocerWees and our goal is to make shopping more collaborative. Our application allows users to shop together and share the same shopping cart online. We include groceries using an API so our comstomers have up to date prices and discounts. We also include a suggestion based on what you have ordered in the past. In our website, we include login a login or sign up page so all carts are saved. Once you are done, you can export the shared cart to the real King Soopers app and it will appear right there. The benefits of this is removing the need to have one person do it and instead have multiple people do it. We put harsh guardrails on duplicated items, incase there is confusion in a house hold. These guardrails are warning messages that this item is already in the cart.
 
 6. Audience:
 Households, Families, Parties, People that shop together.
 
 7. Vision Statement:
 For Shoppers, Who want to shop together. GrocerWees is a collaborative shopping app that allows multiple people to shop together with a shared digital online shopping list. Unlike Amazon, our product allows collaboration between shoppers with shared and automatically updating shopping lists.
-
 
 9. Development Methodology: We are using Agile Methodology
 
@@ -29,3 +28,13 @@ We use Discord for messaging and weekly meetings.
 
 11. Meeting Plan:
 We plan to meet over Discord every Tuesday at 4:30 PM. Our team meets with the TA in lab at 3:15 PM on Thursdays.
+
+12. Use Case Diagram:
+A picture is in this folder.
+
+Extra Credit:
+1. Two people add or remove something from the cart at the same time, causing interference issues. This would have large severity, as it would mess up our database and ruin the cart people rely on. A suitable thing we could implement would be using transaction in our database, so it could handle multiple connections at once and this issue would not occur.
+2. One person removes a grocery, but the other person wanted that grocery. This isnt a very severe problem, as you could always find it in the big list again. We could implement cart history to mitigate this.
+3. Our database returns wrong items in the cart. This would be a large risk if the customer has already paid and got groceries they didnt want. We could implement ACID in our database, promoting all or none and correct information.
+4. Two people put the same thigng on the shopping list, but they only want one. This would also be severe, because then you would get more groceries then you wanted. We could implement a note that this item is already in the cart.
+5. Discounts are not updated and use old values. This would be a medium level of severity because you can always double check it. We could prevent this by constantly utilizing the King Soopers API and pull live information from there.
