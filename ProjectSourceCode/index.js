@@ -9,12 +9,12 @@ const handlebars = require(`express-handlebars`);
 const Handlebars = require('handlebars');
 const bcrypt = require('bcryptjs');
 
-
-
 for await (const i of glob('routes/**/*.js')) {
     console.log(`Loading route ${i}`);
     await import(`./${i}`);
 }
+
+// Remember, put routes in the routes folder like mentioned in the README
 
 app.listen(3000, () => {
     console.log("Server listening...");
