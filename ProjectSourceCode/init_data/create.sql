@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS lists (
     list_id SERIAL PRIMARY KEY,
     items TEXT[],
+    invites TEXT[],
     name VARCHAR(255) NOT NULL
 );
 
