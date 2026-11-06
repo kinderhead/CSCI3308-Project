@@ -1,17 +1,18 @@
+// Javscript instead of typescript to work with the tests
+
 import pg_promise from "pg-promise";
-import { POSTGRES_DB, NODE_ENV, POSTGRES_USER, POSTGRES_PASSWORD } from '$app/env/private';
 
 const pgp = pg_promise();
-if (NODE_ENV === 'test' && (!POSTGRES_DB || !POSTGRES_DB.endsWith('_test'))) {
+if (process.env.NODE_ENV === 'test' && (!process.env.POSTGRES_DB || !process.env.POSTGRES_DB.endsWith('_test'))) {
     throw new Error('Tests require a database name ending in _test');
 }
 
 const dbConfig = {
     host: 'db',
     port: 5432,
-    database: POSTGRES_DB,
-    user: POSTGRES_USER,
-    password: POSTGRES_PASSWORD
+    database: process.env.POSTGRES_DB,
+    user: process.env.POSTGRES_USER,
+    password: process.env.POSTGRES_PASSWORD
 };
 
 const db = pgp(dbConfig);
@@ -25,4 +26,4 @@ db.connect()
         console.log('ERROR:', error.message || error);
     });
 
-export { db };
+export { db, pgp };

@@ -1,5 +1,5 @@
 services:
-  db-test:
+  db:
     image: postgres:17.6
     env_file: .env.test
     healthcheck:
@@ -11,13 +11,34 @@ services:
       start_period: 10s
     volumes:
       - lab10-test-db:/var/lib/postgresql/data
-      - ./src/init_data:/docker-entrypoint-initdb.d:ro
+      - ./init_data:/docker-entrypoint-initdb.d:ro
+  web:
+    image: node:lts
+    user: 'node'
+    working_dir: /home/node/app
+    env_file: .env.test
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - db
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./:/home/node/app
+    healthcheck:
+      test:
+        ['CMD-SHELL', 'node -e "http.get(\"http://localhost:8080\", (r) => process.exit(r.statusCode === 200 ? 0 : 1))"']
+      interval: 2s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+    command: 'npm run dev'
   tests:
     image: node:22.19.0-bookworm
     working_dir: /repository
     env_file: .env.test
     depends_on:
-      db-test:
+      db:
         condition: service_healthy
     volumes:
       - ./:/repository

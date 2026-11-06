@@ -4,5 +4,7 @@ export const variables = defineEnvVars({
     POSTGRES_USER: {},
     POSTGRES_PASSWORD: {},
     POSTGRES_DB: {},
-    NODE_ENV: {}
+    NODE_ENV: {},
+    SESSION_SECRET: {},
+    BASE64_KEY: {}
 });
