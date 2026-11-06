@@ -13,10 +13,13 @@ after(() => {
 
 describe("Example route", () => {
     it("returns 0", async () => {
-        const res = await chai.request(app).get("/example");
+        const res = await chai.request(app).get("/example?query=7");
         expect(res).to.have.status(200);
         expect(res.body).to.deep.equal({
-            count: "0"
+            db: {
+                count: "0"
+            },
+            query: "7"
         });
     });
 });
