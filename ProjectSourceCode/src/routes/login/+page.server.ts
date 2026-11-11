@@ -1,8 +1,8 @@
-import type { Actions, PageServerLoad } from './$types';
+import { createSession, getUserByEmail } from '#lib/server/db.js';
 import { fail, redirect } from '@sveltejs/kit';
-import { randomBytes, createHash } from 'node:crypto';
 import bcrypt from 'bcryptjs';
-import { getUserByEmail, createSession } from '#lib/db.js';
+import { createHash, randomBytes } from 'node:crypto';
+import type { Actions, PageServerLoad } from './$types';
 
 export const load = (async ({ cookies }) => {
     // optional: redirect to '/' if already logged in
