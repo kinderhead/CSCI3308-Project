@@ -1,5 +1,5 @@
-import { db } from "#lib/server/db.js";
 import type { ListItem } from "#lib/list.ts";
+import { db } from "#lib/server/db.js";
 import { command, query } from "$app/server";
 import * as v from 'valibot';
 
@@ -17,11 +17,13 @@ export const liveList = query.live(v.string(), async function* (id) {
 
 export const addItem = command(v.object({
     id: v.string(),
-    name: v.string()
-}), async function ({id, name}) {
+    name: v.string(),
+    kroger: v.optional(v.string())
+}), async function ({ id, name, kroger }) {
     await db.query("UPDATE lists SET items = array_append(items, $2) WHERE list_id = $1;", [id, JSON.stringify({
         id: crypto.randomUUID(),
-        name
+        name,
+        kroger_id: kroger
     } satisfies ListItem)]);
     liveList(id).reconnect();
 });
