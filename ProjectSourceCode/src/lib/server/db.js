@@ -1,4 +1,3 @@
-// Javscript instead of typescript to work with the tests
 
 import pg_promise from "pg-promise";
 
@@ -26,4 +25,26 @@ db.connect()
         console.log('ERROR:', error.message || error);
     });
 
-export { db, pgp };
+
+async function getUserByEmail(email) {
+    return db.oneOrNone(
+        'SELECT email, password, name FROM users WHERE email = $1',
+        [email]
+    );
+}
+
+async function createUser({ email, name, passwordHash }) {
+    await db.none(
+        'INSERT INTO users (email, password, name, salt) VALUES ($1, $2, $3, $4)',
+        [email, passwordHash, name, '']
+    );
+}
+
+async function createSession({ email, tokenHash, expiresAt }) {
+    await db.none(
+        'INSERT INTO sessions (token_hash, email, expires_at) VALUES ($1, $2, $3)',
+        [tokenHash, email, expiresAt]
+    );
+}
+
+export { db, pgp, getUserByEmail, createUser, createSession };
