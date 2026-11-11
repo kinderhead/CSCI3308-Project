@@ -2,9 +2,9 @@ import axios from 'axios';
 import qs from 'qs';
 
 export async function load({ url }) {
-    let search = url.searchParams.get('search')?.toString();
+    let search = url.searchParams.get('search')?.toString().trim();
 
-    if(!search||!search.match("^[a-zA-Z0-9 ]+$")||search.length<3){
+    if(!search||!search.match("^[a-zA-Z0-9 ]+$")||search.length<3||search.length>127||search.split(" ").length>8){
         return{
             results: {data: []},
             search: search
