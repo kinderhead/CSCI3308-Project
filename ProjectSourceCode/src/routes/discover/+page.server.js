@@ -4,7 +4,7 @@ import qs from 'qs';
 export async function load({ url }) {
     let search = url.searchParams.get('search')?.toString();
 
-    if(!search||!search.match("^[a-zA-Z0-9]+$")||search.length<3){
+    if(!search||!search.match("^[a-zA-Z0-9 ]+$")||search.length<3){
         return{
             results: {data: []},
             search: search

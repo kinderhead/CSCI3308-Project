@@ -24,27 +24,27 @@
   </div>
 </form>
 {#if (data.results.data.length != 0)}
-<h1>Showing results for {data.search}</h1>
+<h4 style="padding-left:10%">Showing results for {data.search}</h4>
 {:else if (data.search == null)||(data.search=="")}
 {:else}
-<h1>No results found for {data.search}</h1>
+<h4 style="padding-left:10%; padding-right:10%">No results found for {data.search}</h4>
 {/if}
 
 
 {#each data.results.data as item}
   <div style="padding: 0.5rem;justify-content: center;align-items: center;display:flex">
-    <div class="card" style="width: 90%; height: 5%; padding: 1rem; border-radius: 3rem;">
+    <div class="card shadow-sm p-6 mb-7 bg-white rounded " style="width: 90%; height: 5%; padding: 1rem; border-radius: 3rem;">
       <div class="container">
-        <div class="row">
-          <div class="col-sm d-flex justify-content-center align-items-center" style="width:auto">
+        <div class="row" style="justify-content: center; align-items: center; display:flex">
+          <div class="col-md-auto d-flex justify-content-center align-items-center" style="width:auto;border-color: black;border-width: 2px;">
             <img
               src={`https://www.kroger.com/product/images/large/front/${item.upc}`}
               class="card-img-top"
               alt="item picture"
-              style="height: auto;width:45%"
+              style="height: 250px;width:auto"
             />
           </div>
-          <div class="col-sm">
+          <div class="col-md">
             <div class="card-body">
               <h5 class="card-title">{item.description}</h5>
               <p class="card-text">UPC: {item.upc}</p>
