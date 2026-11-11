@@ -1,5 +1,9 @@
 <script>
   let { data } = $props();
+  function listAdd( jsonion ){
+    console.log(jsonion);
+    return jsonion;
+  }
 </script>
 
 <form action="/discover" method="GET">
@@ -17,7 +21,7 @@
           />
         </div>
         <div class="col-1">
-          <button class="btn btn-primary" type="submit">Search</button>
+          <button class="btn btn-secondary" type="submit">Search</button>
         </div>
       </div>
     </div>
@@ -49,7 +53,13 @@
               <h5 class="card-title">{item.description}</h5>
               <p class="card-text">UPC: {item.upc}</p>
               <p class="card-text">Brand: {item.brand}</p>
-              <a class="btn btn-primary">Add To List</a>
+              <form action="/listAdd" method="POST">
+                <a class="btn btn-primary" onclick={listAdd({
+                  itemName:item.description,
+                  id:item.upc
+                })
+                }>Add To List</a>
+              </form>
             </div>
           </div>
         </div>
