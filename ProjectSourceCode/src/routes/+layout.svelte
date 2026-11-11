@@ -11,24 +11,47 @@
 	<link rel="icon" href={favicon} />
 </svelte:head>
 
-<header>
-    <nav class="navbar navbar-expand-sm border-bottom">
-        <div class="container">
-            <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbar-collapse" aria-controls="navbar" aria-expanded="false"
+<header class="header">
+    <nav class="navbar navbar-expand-sm w-100">
+        <div class="container-fluid">
+
+            <!-- Hamburger Menu -->
+            <button class="navbar-toggler menu-button"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbar-collapse"
+                aria-controls="navbar-collapse"
+                aria-expanded="false"
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
+            <!-- Website Name -->
+            <a class="site-name navbar-brand" href="/preview">
+                GrocerWees
+            </a>
+
+            <!-- Logo -->
+            <div class="logo">
+                Logo
+            </div>
+
+            <!-- Collapsible Navigation -->
             <div class="collapse navbar-collapse" id="navbar-collapse">
-                <ul class="navbar-nav me-auto">
+                <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/discover">Discover</a>
+                        <a class="nav-link" href="/discover">
+                            Discover
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link account" href="/logout">
+                            Log Out
+                        </a>
                     </li>
                 </ul>
-                <div class="nav-item me-1">
-                    <a class="nav-link" href="/logout">Log Out</a>
-                </div>
             </div>
+
         </div>
     </nav>
 </header>
@@ -37,8 +60,12 @@
     {@render children()}
 </div>
 
-<footer class="text-center text-muted w-100 mt-auto fixed-bottom">
-    <p>
+<footer class="footer text-center text-muted w-100 mt-auto fixed-bottom">
+    <p class="footer-text">
         &copy; The Grocery Gang 2026
     </p>
 </footer>
+
+
+
+
