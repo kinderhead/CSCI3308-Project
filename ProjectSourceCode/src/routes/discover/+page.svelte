@@ -36,7 +36,7 @@
     <div class="card shadow-sm p-6 mb-7 bg-white rounded " style="width: 90%; height: 5%; padding: 1rem; border-radius: 3rem;">
       <div class="container">
         <div class="row" style="justify-content: center; align-items: center; display:flex">
-          <div class="col-md-auto d-flex justify-content-center align-items-center" style="width:auto;border-color: black;border-width: 2px;">
+          <div class="col-md-auto d-flex justify-content-center align-items-center" style="width:auto;">
             <img
               src={`https://www.kroger.com/product/images/large/front/${item.upc}`}
               class="card-img-top"
