@@ -27,7 +27,7 @@
             </button>
 
             <!-- Website Name -->
-            <a class="site-name navbar-brand" href="/preview">
+            <a class="site-name navbar-brand" href="/">
                 GrocerWees
             </a>
 
