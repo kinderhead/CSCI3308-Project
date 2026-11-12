@@ -3,11 +3,13 @@ import qs from 'qs';
 
 export async function load({ url }) {
     let search = url.searchParams.get('search')?.toString().trim();
+    let listID = url.searchParams.get('id')?.toString().trim();
 
     if(!search||search.length<3||search.length>127||search.split(" ").length>8){
         return{
             results: {data: []},
-            search: search
+            search: search,
+            id: listID
         }
     }
 
@@ -41,6 +43,7 @@ export async function load({ url }) {
     const response = (await axios.request(config))
     return {
         results: response.data,
-        search: search
+        search: search,
+        id: listID
     };
 }
