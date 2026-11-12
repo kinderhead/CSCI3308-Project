@@ -27,14 +27,9 @@
             </button>
 
             <!-- Website Name -->
-            <a class="site-name navbar-brand" href="/">
-                GrocerWees
+            <a class="site-name navbar-brand" href="/" title="Home">
+                <enhanced:img src="#lib/assets/logo_with_fellas.png" alt="GrocerWees Logo" class="h-10 w-auto" />
             </a>
-
-            <!-- Logo -->
-            <div class="logo">
-                Logo
-            </div>
 
             <!-- Collapsible Navigation -->
             <div class="collapse navbar-collapse" id="navbar-collapse">
