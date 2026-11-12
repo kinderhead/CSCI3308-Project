@@ -22,7 +22,7 @@
           />
         </div>
         <div class="col-1">
-          <button class="btn btn-secondary" type="submit">Search</button>
+          <button class="btn btn-primary" type="submit">Search</button>
         </div>
       </div>
     </div>
@@ -70,13 +70,23 @@
               <p class="card-text">Brand: {item.brand}</p>
 
               <form action="/listAdd" method="POST">
+
+
+                {#if true}
                 <a class="btn btn-primary" onclick={() => callListAdd({
                   itemName:item.description,
                   kroger_id:item.upc
                 })
-                }
-                >Add To List</a>
+                }>
+                Add To List</a>
+                {:else}
+
+                {/if}
+
+
+
               </form>
+  
             </div>
           </div>
 
