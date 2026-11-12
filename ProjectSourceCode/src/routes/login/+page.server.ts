@@ -44,6 +44,6 @@ export const actions = {
             maxAge
         });
 
-        redirect(303, '/');
+        redirect(303, '/home');
     }
 } satisfies Actions;
