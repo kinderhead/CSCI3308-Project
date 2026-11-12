@@ -20,6 +20,12 @@
             placeholder="Search"
             value={data.search}
           />
+          <input
+            type="hidden"
+            id="id"
+            name="id"
+            value={data.id}
+          />
         </div>
         <div class="col-1">
           <button class="btn btn-primary" type="submit">Search</button>
@@ -73,7 +79,7 @@
 
 
                 {#if true}
-                <a class="btn btn-primary" onclick={() => callListAdd({
+                <a class="btn btn-primary" onclick={() => listAdd({
                   item:item.description,
                   kroger_id:item.upc
                 })
