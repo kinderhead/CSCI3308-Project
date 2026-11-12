@@ -74,7 +74,7 @@
 
                 {#if true}
                 <a class="btn btn-primary" onclick={() => callListAdd({
-                  itemName:item.description,
+                  item:item.description,
                   kroger_id:item.upc
                 })
                 }>
