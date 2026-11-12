@@ -1,4 +1,4 @@
-import { db } from '#lib/db.js';
+import { db } from '#lib/server/db.js';
 import type { RequestHandler } from './$types';
 
 export const GET: RequestHandler = async (event) => {

@@ -14,17 +14,20 @@ const dbConfig = {
     password: process.env.POSTGRES_PASSWORD
 };
 
-const db = pgp(dbConfig);
+if (!globalThis.__pgPromiseDb) {
+    globalThis.__pgPromiseDb = pgp(dbConfig);
 
-db.connect()
-    .then(obj => {
-        console.log('Database connection successful');
-        obj.done();
-    })
-    .catch(error => {
-        console.log('ERROR:', error.message || error);
-    });
+    globalThis.__pgPromiseDb.connect()
+        .then(obj => {
+            console.log('Database connection successful');
+            obj.done();
+        })
+        .catch(error => {
+            console.log('ERROR:', error.message || error);
+        });
+}
 
+const db = __pgPromiseDb;
 
 
 /**
