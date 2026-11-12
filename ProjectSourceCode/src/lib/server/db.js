@@ -7,7 +7,7 @@ if (process.env.NODE_ENV === 'test' && (!process.env.POSTGRES_DB || !process.env
 }
 
 const dbConfig = {
-    host: 'db',
+    host: process.env.POSTGRES_HOST || 'db',
     port: 5432,
     database: process.env.POSTGRES_DB,
     user: process.env.POSTGRES_USER,
@@ -29,7 +29,10 @@ if (!globalThis.__pgPromiseDb) {
 
 const db = __pgPromiseDb;
 
-// @ts-ignore
+
+/**
+ * @param {string} email
+ */
 async function getUserByEmail(email) {
     return db.oneOrNone(
         'SELECT email, password, name FROM users WHERE email = $1',
@@ -37,15 +40,18 @@ async function getUserByEmail(email) {
     );
 }
 
-// @ts-ignore
+/**
+ * @param {{ email: string, name: string, passwordHash: string }} user
+ */
 async function createUser({ email, name, passwordHash }) {
     await db.none(
         'INSERT INTO users (email, password, name, salt) VALUES ($1, $2, $3, $4)',
         [email, passwordHash, name, '']
     );
 }
-
-// @ts-ignore
+/**
+ * @param {{ email: string, tokenHash: string, expiresAt: Date }} session
+ */
 async function createSession({ email, tokenHash, expiresAt }) {
     await db.none(
         'INSERT INTO sessions (token_hash, email, expires_at) VALUES ($1, $2, $3)',

@@ -2,6 +2,7 @@ import { createUser } from '#lib/server/db.js';
 import { fail, redirect } from '@sveltejs/kit';
 import bcrypt from 'bcryptjs';
 import type { Actions, PageServerLoad } from './$types';
+import { validateRegistration } from '#lib/validateRegistration.js';
 
 export const load = (async () => {
     // optional: redirect to '/' if already logged in
@@ -35,7 +36,7 @@ export const actions = {
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)) {
             return fail(400, { error: 'Please enter a valid email address.', ...values });
         }
-        if (password.length < 8) {
+        if (!validateRegistration({ password })) {
             return fail(400, { error: 'Password must be at least 8 characters.', ...values });
         }
         if (Buffer.byteLength(password) > 72) {
