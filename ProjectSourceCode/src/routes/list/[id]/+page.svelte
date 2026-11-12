@@ -4,4 +4,6 @@
     let { params } = $props();
 </script>
 
-<List id={params.id}/>
+<div class="m-8">
+    <List id={params.id}/>
+</div>
