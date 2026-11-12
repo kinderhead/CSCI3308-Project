@@ -58,7 +58,7 @@ body {
 .sidebar {
     width: 15.1875rem;
     flex-shrink: 0;
-    background-color: white;
+    background-color: rgb(221, 220, 220);
     padding: 0.75rem 0.9375rem;
     display: flex;
     flex-direction: column;
@@ -78,7 +78,7 @@ body {
 }
 
 .sidebar-list li {
-    color: #777;
+    color: #fffdfd;
     font-size: 1.25rem;
     cursor: pointer;
 }
