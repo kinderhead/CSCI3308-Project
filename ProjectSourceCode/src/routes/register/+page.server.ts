@@ -1,7 +1,7 @@
-import type { Actions, PageServerLoad } from './$types';
+import { createUser } from '#lib/server/db.js';
 import { fail, redirect } from '@sveltejs/kit';
 import bcrypt from 'bcryptjs';
-import { createUser } from '#lib/db.js';
+import type { Actions, PageServerLoad } from './$types';
 import { validateRegistration } from '#lib/validateRegistration.js';
 
 export const load = (async () => {

@@ -10,7 +10,7 @@ let db;
 let pgp;
 
 before(async () => {
-    ({ db, pgp } = await import('../src/lib/db.js'));
+    ({ db, pgp } = await import('../src/lib/server/db.js'));
 });
 
 after(() => {
