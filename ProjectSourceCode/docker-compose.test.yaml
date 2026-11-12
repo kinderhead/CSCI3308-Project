@@ -1,5 +1,6 @@
+
 services:
-  db:
+  db-test:
     image: postgres:17.6
     env_file: .env.test
     healthcheck:
@@ -12,38 +13,41 @@ services:
     volumes:
       - lab10-test-db:/var/lib/postgresql/data
       - ./init_data:/docker-entrypoint-initdb.d:ro
+
   web:
-    image: node:lts
-    user: 'node'
-    working_dir: /home/node/app
+    image: node:22.19.0-bookworm
+    working_dir: /repository
     env_file: .env.test
-    environment:
-      - NODE_ENV=development
     depends_on:
-      - db
-    ports:
-      - '3000:3000'
+      db-test:
+        condition: service_healthy
     volumes:
-      - ./:/home/node/app
+      - ./:/repository
+      - lab10-test-node-modules:/repository/node_modules
+    command: ['npm', 'run', 'dev:test']
     healthcheck:
       test:
-        ['CMD-SHELL', 'node -e "http.get(\"http://localhost:8080\", (r) => process.exit(r.statusCode === 200 ? 0 : 1))"']
+        - CMD
+        - node
+        - -e
+        - "fetch('http://127.0.0.1:3000/welcome').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"
       interval: 2s
       timeout: 5s
-      retries: 20
+      retries: 30
       start_period: 10s
-    command: 'npm run dev'
+
   tests:
     image: node:22.19.0-bookworm
     working_dir: /repository
     env_file: .env.test
     depends_on:
-      db:
+      web:
         condition: service_healthy
     volumes:
       - ./:/repository
       - lab10-test-node-modules:/repository/node_modules
     command: ['npm', 'test']
+
 volumes:
   lab10-test-db:
   lab10-test-node-modules:
