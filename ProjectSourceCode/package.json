@@ -14,7 +14,12 @@
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+<<<<<<< HEAD
 		"test": "mocha --timeout 10000 \"test/**/*.spec.cjs\""
+=======
+        "test": "mocha --timeout 10000 \"test/**/*.spec.cjs\"",
+		"dev:test": "vite dev --host 0.0.0.0 --port 3000"
+>>>>>>> origin/main
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^8.0.0",
