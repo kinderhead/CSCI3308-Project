@@ -1,9 +1,34 @@
-<script lang=ts>
+<script lang="ts">
+  import { getList, addItem, removeItem } from '#lib/list.remote.js';
   let { data } = $props();
-  function callListAdd(jsonion : {} ){
-    console.log(jsonion);
-    return undefined;
+  let listOfItems = $state(await getList(data.id!));
+
+  async function updateList() {
+    await getList(data.id!).refresh();
+    listOfItems = await getList(data.id!);
   }
+
+  async function callAddItem(jsonion: { id: string; name: string; kroger?: string | undefined; }) {
+    await updateList();
+    if (!(await itemExists(jsonion.kroger!))){
+      await addItem(jsonion); 
+    }
+    await updateList();
+  }
+
+  async function itemExists(kroger: string){
+    return listOfItems.some(anItem => anItem.kroger_id===kroger);
+  }
+
+  async function callRemoveItem(kroger: string) {
+    await updateList();
+    if(await itemExists(kroger)){
+      const listItemID = listOfItems.find((anItem) => anItem.kroger_id === kroger)!.id;
+      await removeItem({list_id: data.id!, id: listItemID});
+    }
+    await updateList();
+  }
+
 </script>
 
 <!-- SEARCH BAR --> 
@@ -13,18 +38,18 @@
       <div class="row">
         <div class="col-11">
           <input
+            type="hidden"
+            id="id"
+            name="id"
+            value={data.id}
+          />
+          <input
             class="form-control"
             id="search"
             name="search"
             type="text"
             placeholder="Search"
             value={data.search}
-          />
-          <input
-            type="hidden"
-            id="id"
-            name="id"
-            value={data.id}
           />
         </div>
         <div class="col-1">
@@ -54,6 +79,10 @@
 
 <!--  Dynamic display of items returned by Kroger API   -->
 {#each data.results.data as item}
+
+  <!-- variable declaration for when data is being added to list -->
+  {let loading = $state(false);}
+
   <div style="justify-content: center;align-items: center;display:flex;">
     <div class="card shadow-sm p-6 mb-7 bg-white rounded " style="width: 90%; height: 5%; padding: 1rem; border-radius: 3rem;">
       <div class="container">
@@ -63,7 +92,7 @@
             <img
               src={`https://www.kroger.com/product/images/large/front/${item.upc}`}
               class="card-img-top"
-              alt="item picture"
+              alt="item"
               style="height:auto;width:175px"
             />
           </div>
@@ -75,24 +104,61 @@
               <p class="card-text">UPC: {item.upc}</p>
               <p class="card-text">Brand: {item.brand}</p>
 
-              <form action="/listAdd" method="POST">
+              <!-- fun little script that shows "updating list" when item is being processed in <script> tag -->
 
+              {#if loading}
+                <button
+                  type="button"
+                  class="btn btn-secondary disabled"
+                >Updating List...</button>
+              {:else}
 
-                {#if true}
-                <a class="btn btn-primary" onclick={() => listAdd({
-                  item:item.description,
-                  kroger_id:item.upc
-                })
-                }>
-                Add To List</a>
+                <!-- will either say "Add to List" if item doesn't exist in list yet or "Remove from List" if it does -->
+
+                {#if !listOfItems.some(anItem => anItem.kroger_id===item.upc)}
+                  <button
+
+                    type="button"
+                    class="btn btn-primary"
+                    
+                    // will declare if that item is loading while running callAddItem()
+
+                    onclick={ async () => {
+                      loading = true;
+                      await callAddItem({
+                        id: data.id!,
+                        name: item.description,
+                        kroger: item.upc
+                      })
+
+                      loading = false;
+
+                    }}
+                  >
+                    Add To List
+                  </button>
+
                 {:else}
 
+                  <button
+
+                    type="button"
+                    class="btn btn-danger"
+
+                    // will declare if that item is loading while running callRemoveItem()
+
+                    onclick={async () =>{
+                      loading = true;
+                      await callRemoveItem(item.upc)
+                      loading = false;
+                      }
+                    }
+
+                  >
+                    Remove from List
+                  </button>
                 {/if}
-
-
-
-              </form>
-  
+              {/if}
             </div>
           </div>
 
