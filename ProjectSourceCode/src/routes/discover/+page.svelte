@@ -32,7 +32,7 @@
 </script>
 
 <!-- SEARCH BAR --> 
-<form action="/discover" method="GET">
+<form action="/discover" method="GET" data-sveltekit-reload>
   <div style="padding: 20px">
     <div class="container" style="width: 80%;">
       <div class="row">
