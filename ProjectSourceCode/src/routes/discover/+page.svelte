@@ -1,6 +1,7 @@
 <script lang="ts">
   import { getList, addItem, removeItem } from '#lib/list.remote.js';
   let { data } = $props();
+  // svelte-ignore state_referenced_locally
   let listOfItems = $state(await getList(data.id!));
 
   async function updateList() {
@@ -81,7 +82,7 @@
 {#each data.results.data as item}
 
   <!-- variable declaration for when data is being added to list -->
-  {let loading = $state(false);}
+  {let loading: boolean = $state(false);}
 
   <div style="justify-content: center;align-items: center;display:flex;">
     <div class="card shadow-sm p-6 mb-7 bg-white rounded " style="width: 90%; height: 5%; padding: 1rem; border-radius: 3rem;">
