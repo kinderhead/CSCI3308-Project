@@ -59,4 +59,18 @@ async function createSession({ email, tokenHash, expiresAt }) {
     );
 }
 
-export { db, pgp, getUserByEmail, createUser, createSession };
+async function getUserBySessionHash(tokenHash) {
+    return db.oneOrNone(
+        `SELECT u.email, u.name
+         FROM sessions s
+         JOIN users u ON u.email = s.email
+         WHERE s.token_hash = $1 AND s.expires_at > NOW()`,
+        [tokenHash]
+    );
+}
+
+async function deleteSession(tokenHash) {
+    await db.none('DELETE FROM sessions WHERE token_hash = $1', [tokenHash]);
+}
+
+export { db, pgp, getUserByEmail, createUser, createSession, getUserBySessionHash, deleteSession };
