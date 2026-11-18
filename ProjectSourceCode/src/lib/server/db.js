@@ -59,6 +59,9 @@ async function createSession({ email, tokenHash, expiresAt }) {
     );
 }
 
+/**
+ * @param {string} tokenHash
+ */
 async function getUserBySessionHash(tokenHash) {
     return db.oneOrNone(
         `SELECT u.email, u.name
@@ -69,6 +72,9 @@ async function getUserBySessionHash(tokenHash) {
     );
 }
 
+/**
+ * @param {string} tokenHash
+ */
 async function deleteSession(tokenHash) {
     await db.none('DELETE FROM sessions WHERE token_hash = $1', [tokenHash]);
 }

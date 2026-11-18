@@ -1,4 +1,3 @@
-
 <script lang="ts">
     import type { ActionData } from "./$types";
 
@@ -7,26 +6,15 @@
 
 <!-- Page Layout -->
 <div class="page-layout">
-
     <!-- Sidebar -->
     <aside class="sidebar">
-
         <div class="sidebar-item">
-            <button type="button" class="new-list-btn">
-                New List
-            </button>
+            <button type="button" class="new-list-btn"> New List </button>
         </div>
 
-        <div class="sidebar-item">
-            My Lists:
-        </div>
+        <div class="sidebar-item">My Lists:</div>
 
-        
-
-        <a href="#" class="logout">
-            Logout
-        </a>
-
+        <a href="/logout" class="logout"> Logout </a>
     </aside>
 
     <!-- Main Content -->
@@ -35,14 +23,13 @@
             <h2>Welcome to GrocerWees!</h2>
         </main>
     </div>
-
 </div>
 
 <style>
     .new-list-btn {
         display: block;
         padding: 0.75rem 1.5rem;
-        background-color: #4CAF50;
+        background-color: #4caf50;
         color: white;
         border: none;
         border-radius: 0.5rem;
@@ -50,6 +37,6 @@
     }
 
     .new-list-btn:hover {
-        background-color: #388E3C;
+        background-color: #388e3c;
     }
 </style>
