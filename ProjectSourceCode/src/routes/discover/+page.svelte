@@ -1,6 +1,8 @@
 <script lang="ts">
-  import { getList, addItem, removeItem } from '#lib/list.remote.js';
+  import { addItem, getList, removeItem } from '#lib/list.remote.js';
+    import { goto } from '$app/navigation';
   let { data } = $props();
+  // svelte-ignore state_referenced_locally
   let listOfItems = $state(await getList(data.id!));
 
   async function updateList() {
@@ -52,8 +54,12 @@
             value={data.search}
           />
         </div>
-        <div class="col-1">
+        <div class="col-1 flex gap-2">
           <button class="btn btn-primary" type="submit">Search</button>
+          <button class="btn btn-secondary" onclick={async (e) => {
+            e.preventDefault();
+            await goto(`/home?id=${data.id}`);
+          }}>Return</button>
         </div>
       </div>
     </div>
