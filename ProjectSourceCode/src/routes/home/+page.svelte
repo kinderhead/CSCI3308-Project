@@ -36,7 +36,15 @@
             {/each}
         </div>
 
-        <a href="/logout" class="logout"> Logout </a>
+
+        
+        <form action="/logout" method="POST">
+            <button type="submit" class="logout">
+                Logout
+            </button>
+        </form>
+
+
     </aside>
 
     <!-- Main Content -->

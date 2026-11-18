@@ -1,4 +1,3 @@
-
 import pg_promise from "pg-promise";
 
 const pgp = pg_promise();
