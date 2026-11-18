@@ -39,9 +39,16 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link account" href="/logout">
-                            Log Out
-                        </a>
+                        
+                        <form action="/logout" method="POST">
+                            <button
+                                type="submit"
+                                class="nav-link account"
+                            >
+                                Log Out
+                            </button>
+                        </form>
+
                     </li>
                 </ul>
             </div>
