@@ -1,6 +1,6 @@
-import type { Handle } from '@sveltejs/kit';
+import type { Handle } from '@sveltejs/kit/hooks';
 import { createHash } from 'node:crypto';
-import { getUserBySessionHash } from '#lib/db.js';
+import { getUserBySessionHash } from '#lib/server/db.js';
 
 export const handle: Handle = async ({ event, resolve }) => {
     const token = event.cookies.get('session_token');
