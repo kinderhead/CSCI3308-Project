@@ -1,5 +1,8 @@
 {
-	"files.associations": {
-		"*.css": "tailwindcss"
-	}
+    "files.associations": {
+        "*.css": "tailwindcss"
+    },
+    "js/ts.experimental.useTsgo": false,
+    "editor.detectIndentation": false,
+    "editor.tabSize": 4
 }

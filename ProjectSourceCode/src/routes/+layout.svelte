@@ -1,10 +1,9 @@
 <script lang="ts">
 	import './layout.css';
 	import favicon from '#lib/assets/favicon.svg';
-	import type { LayoutProps } from './$types';
     import 'bootstrap/dist/css/bootstrap.min.css';
 
-	let { children }: LayoutProps = $props();
+	let { children } = $props();
 </script>
 
 <svelte:head>
@@ -40,9 +39,16 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link account" href="/logout">
-                            Log Out
-                        </a>
+                        
+                        <form action="/logout" method="POST">
+                            <button
+                                type="submit"
+                                class="nav-link account"
+                            >
+                                Log Out
+                            </button>
+                        </form>
+
                     </li>
                 </ul>
             </div>

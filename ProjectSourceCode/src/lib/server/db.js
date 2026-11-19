@@ -1,4 +1,3 @@
-
 import pg_promise from "pg-promise";
 
 const pgp = pg_promise();
@@ -59,4 +58,24 @@ async function createSession({ email, tokenHash, expiresAt }) {
     );
 }
 
-export { db, pgp, getUserByEmail, createUser, createSession };
+/**
+ * @param {string} tokenHash
+ */
+async function getUserBySessionHash(tokenHash) {
+    return db.oneOrNone(
+        `SELECT u.email, u.name
+         FROM sessions s
+         JOIN users u ON u.email = s.email
+         WHERE s.token_hash = $1 AND s.expires_at > NOW()`,
+        [tokenHash]
+    );
+}
+
+/**
+ * @param {string} tokenHash
+ */
+async function deleteSession(tokenHash) {
+    await db.none('DELETE FROM sessions WHERE token_hash = $1', [tokenHash]);
+}
+
+export { db, pgp, getUserByEmail, createUser, createSession, getUserBySessionHash, deleteSession };

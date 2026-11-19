@@ -34,7 +34,7 @@ export const addItem = command(itemSchema, async function ({ id, name, kroger })
         name,
         kroger_id: kroger
     } satisfies ListItem)]);
-    liveList(id).reconnect();
+    await liveList(id).reconnect();
 });
 
 export const updateItem = command(v.object({
@@ -60,7 +60,7 @@ export const updateItem = command(v.object({
             if (kroger) i.kroger_id = kroger;
 
             await db.query("UPDATE lists SET items = $2 WHERE list_id = $1;", [list_id, items]);
-            liveList(list_id).reconnect();
+            await liveList(list_id).reconnect();
             return;
         }
     }
@@ -82,7 +82,7 @@ export const removeItem = command(v.object({
     let items = await getItems(list_id);
     items = items.filter(i => i.id !== id);
     await db.query("UPDATE lists SET items = $2 WHERE list_id = $1;", [list_id, items]);
-    liveList(list_id).reconnect();
+    await liveList(list_id).reconnect();
 });
 
 export const reorderItems = command(v.object({
